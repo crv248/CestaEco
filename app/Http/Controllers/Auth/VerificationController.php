@@ -21,11 +21,15 @@ class VerificationController extends Controller
     use VerifiesEmails;
 
     /**
-     * Where to redirect users after verification.
+     * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    //protected $redirectTo = '/home';
+
+    protected function redirectTo() {
+        return '/profile/'.auth()->user()->id;
+    }
 
     /**
      * Create a new controller instance.

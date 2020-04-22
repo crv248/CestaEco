@@ -24,11 +24,15 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     /**
-     * Where to redirect users after registration.
+     * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    //protected $redirectTo = '/home';
+
+    protected function redirectTo() {
+        return '/profile/'.auth()->user()->id;
+    }
 
     /**
      * Create a new controller instance.
