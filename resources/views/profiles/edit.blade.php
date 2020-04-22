@@ -20,12 +20,26 @@
                            value="{{ old('name') ?? $user->name }}"
                            autocomplete="location">
 
-                    @error('location')
+                    @error('name')
                     <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
 
+                </div>
+                <div class="form-group">
+                    <label for="address_address">Address</label>
+                    <input type="text" id="address-input" name="address_address" class="form-control map-input">
+                    <input type="hidden" name="address_latitude" id="address-latitude" value="0" />
+                    <input type="hidden" name="address_longitude" id="address-longitude" value="0" />
+                </div>
+                <script>
+                    var latOld = JSON.parse("{{ $user->profile->getLatLong(0) }}");
+                    var longOld = JSON.parse("{{ $user->profile->getLatLong(1) }}");
+                </script>
+
+                <div id="address-map-container" style="width:100%;height:400px; ">
+                    <div style="width: 100%; height: 100%" id="mapEdit"></div>
                 </div>
                 <div class="row">
                     <label for="location" class="col-md-4 col-form-label">Location</label>
@@ -94,3 +108,8 @@
     </form>
 </div>
 @endsection
+@section('scripts')
+    @parent
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initMapEdit" async defer></script>
+    <script src="/js/mapInput.js"></script>
+@stop

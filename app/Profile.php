@@ -14,6 +14,11 @@ class Profile extends Model
         return '/storage/'.$imagepath;
     }
 
+    public function getLatLong($id)
+    {
+        return explode(',', $this->location)[$id];
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

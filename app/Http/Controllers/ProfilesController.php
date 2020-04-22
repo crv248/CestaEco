@@ -18,7 +18,7 @@ class ProfilesController extends Controller
     {
 
         $this->authorize('update', $user->profile);
-       // dd($user->profile);
+       // dd($user->profile->location);
         return view('profiles.edit', compact('user'));
     }
 
